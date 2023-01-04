@@ -18,7 +18,13 @@ roles:
 - name: dcjulian29.teamcity
   src: https://github.com/dcjulian29/ansible-role-teamcity.git
   version: main
-  ```
+- name: dcjulian29.docker
+  src: https://github.com/dcjulian29/ansible-role-docker.git
+  version: main
+- name: dcjulian29.nginx
+  src: https://github.com/dcjulian29/ansible-role-nginx.git
+  version: main
+```
 
 Then download it with `ansible-galaxy`:
 

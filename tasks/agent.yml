@@ -5,7 +5,7 @@
     state: directory
     owner: 1000
     group: "{{ teamcity_group }}"
-    mode: 0755
+    mode: "0755"
   with_items:
     - "{{ teamcity_data_dir }}/{{ teamcity_name }}"
     - "{{ teamcity_data_dir }}/{{ teamcity_name }}/conf"
@@ -24,7 +24,7 @@
     dest: "{{ teamcity_data_dir }}/{{ teamcity_name }}/system/serverTrustedCertificates/"
     owner: 1000
     group: "{{ teamcity_group }}"
-    mode: 0644
+    mode: "0644"
     remote_src: true
   with_items: "{{ teamcity_agent_server_trusted_certificates }}"
   when: teamcity_agent_server_trusted_certificates | length > 0
@@ -42,7 +42,7 @@
   failed_when: >-
     results is failed and
     "No such container" not in results.stderr | default(false)
-  changed_when: "{{ 'No such container' not in results.stderr | default(false) }}"
+  changed_when: "{{ ('No such container' not in results.stderr) | default(false) }}"
   when: agent_image.changed
 
 - name: Ensure Teamcity agent container is created
@@ -77,3 +77,5 @@
 - name: Restart the Teamcity agent container if needed
   ansible.builtin.command: "docker restart {{ teamcity_agent_name }}"
   when: tc_agent.changed
+  register: rc
+  changed_when: "{{ teamcity_agent_name in rc.stdout }}"

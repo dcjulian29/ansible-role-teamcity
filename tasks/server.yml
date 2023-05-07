@@ -5,7 +5,7 @@
     state: directory
     owner: 1000
     group: "{{ teamcity_group }}"
-    mode: 0755
+    mode: "0755"
   with_items:
     - "{{ teamcity_data_dir }}/{{ teamcity_name }}"
     - "{{ teamcity_data_dir }}/{{ teamcity_name }}/conf"
@@ -31,7 +31,7 @@
     dest: "{{ teamcity_data_dir }}/{{ teamcity_name }}/conf/server.xml"
     owner: root
     group: teamcity
-    mode: 0644
+    mode: "0644"
   tags:
     - configure
 
@@ -48,7 +48,7 @@
   failed_when: >-
     results is failed and
     "No such container" not in results.stderr | default(false)
-  changed_when: "{{ 'No such container' not in results.stderr | default(false) }}"
+  changed_when: "{{ ('No such container' not in results.stderr) | default(false) }}"
   when: server_image.changed
 
 - name: Ensure the Teamcity server container is created and running
@@ -75,3 +75,5 @@
 - name: Restart the Teamcity server container if needed
   ansible.builtin.command: "docker restart {{ teamcity_name }}"
   when: tc_server.changed
+  register: rc
+  changed_when: "{{ teamcity_name in rc.stdout }}"

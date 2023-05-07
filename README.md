@@ -1,6 +1,6 @@
 # Ansible Role: teamcity
 
-[![CI](https://github.com/dcjulian29/ansible-role-teamcity/actions/workflows/ci.yml/badge.svg)](https://github.com/dcjulian29/ansible-role-teamcity/actions/workflows/ci.yml) [![GitHub Issues](https://img.shields.io/github/issues-raw/dcjulian29/ansible-role-teamcity.svg)](https://github.com/dcjulian29/ansible-role-teamcity/issues)
+[![Lint](https://github.com/dcjulian29/ansible-role-teamcity/actions/workflows/lint.yml/badge.svg)](https://github.com/dcjulian29/ansible-role-teamcity/actions/workflows/lint.yml) [![GitHub Issues](https://img.shields.io/github/issues-raw/dcjulian29/ansible-role-teamcity.svg)](https://github.com/dcjulian29/ansible-role-teamcity/issues)
 
 This an Ansible role to install a Teamcity Linux based agent with docker support or a Teamcity Server. Both run within a container and NGINX is also used as a reverse proxy to handle HTTPS connections.
 
